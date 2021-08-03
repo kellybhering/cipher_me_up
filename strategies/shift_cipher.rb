@@ -1,18 +1,23 @@
 # frozen_string_literal: true
 
-# This class is an adaptation to Caesar Cipher, allowing ciphering of letters and numbers only. 
+# This class is an adaptation to Caesar Cipher, allowing ciphering a word with letters and numbers only. 
 class ShiftCipher
   class << self
-    def cipher(text, shift_factor: 3)
+    def cipher(word, shift_factor: 3)
+      #check for letters and numbers [\w\d]
+      return word unless shift_factor > 0
+
       result = ''
-      text.each_char { |char| result += shift_char(char, shift_factor) }
+      word.each_char { |char| result += shift_char(char, shift_factor) }
 
       result
     end
 
-    def uncipher(text, unshift_factor: 3)
+    def uncipher(word, unshift_factor: 3)
+      return word unless shift_factor > 0
+
       result = ''
-      text.each_char { |char| result += unshift_char(char, unshift_factor) }
+      word.each_char { |char| result += unshift_char(char, unshift_factor) }
 
       result
     end
@@ -21,13 +26,15 @@ class ShiftCipher
 
     def shift_char(char, shift_factor)
       return ('a'.ord + shift_factor - 1).chr if char == 'z'
-      return ('0'.ord - shift_factor - 1).chr if char == '9'
+      return ('A'.ord + shift_factor - 1).chr if char == 'Z'
+      return ('0'.ord + shift_factor - 1).chr if char == '9'
 
       (char.ord + shift_factor).chr
     end
 
     def unshift_char(char, unshift_factor)
       return ('z'.ord - unshift_factor - 1).chr if char == 'a'
+      return ('Z'.ord - unshift_factor - 1).chr if char == 'A'
       return ('9'.ord - unshift_factor - 1).chr if char == '0'
 
       (char.ord - unshift_factor).chr
