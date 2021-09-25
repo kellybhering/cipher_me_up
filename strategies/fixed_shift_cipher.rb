@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-# This class is an adaptation to Caesar Cipher, allowing ciphering a word with letters and numbers only. 
+# This class is an adaptation to Caesar Cipher, allowing ciphering a word with letters and numbers only.
 class FixedShiftCipher
   class << self
     def cipher(word, shift_factor: 3)
-      return word unless shift_factor > 0
+      return word unless shift_factor.positive?
 
       result = ''
       word.each_char { |char| result += shift_char(char, shift_factor) }
@@ -13,7 +13,7 @@ class FixedShiftCipher
     end
 
     def uncipher(word, unshift_factor: 3)
-      return word unless unshift_factor > 0
+      return word unless unshift_factor.positive?
 
       result = ''
       word.each_char { |char| result += unshift_char(char, unshift_factor) }
