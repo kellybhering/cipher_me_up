@@ -2,12 +2,24 @@
 
 # This class is an adaptation to Caesar Cipher, allowing ciphering a word with letters and numbers only.
 class FixedShiftCipher
+  extend LettersAndNumbersShifter
+
   class << self
     def cipher(word, shift_factor: 3)
       return word unless shift_factor.positive?
 
       result = ''
-      word.each_char { |char| result += shift_char(char, shift_factor) }
+      word.each_char do |char|
+        shifted_value = if is_integer?(char)
+                          shift(number: char,
+                                shift_factor: shift_factor).to_s
+                        else
+                          shift(
+                            letter: char, shift_factor: shift_factor
+                          )
+                        end
+        result += shifted_value
+      end
 
       result
     end
@@ -16,29 +28,25 @@ class FixedShiftCipher
       return word unless unshift_factor.positive?
 
       result = ''
-      word.each_char { |char| result += unshift_char(char, unshift_factor) }
+      word.each_char do |char|
+        unshifted_value = if is_integer?(char)
+                            unshift(number: char,
+                                    shift_factor: unshift_factor).to_s
+                          else
+                            unshift(
+                              letter: char, shift_factor: unshift_factor
+                            )
+                          end
+        result += unshifted_value
+      end
 
       result
     end
 
     private
 
-    def shift_char(char, shift_factor)
-      return char if char == '_' || /\W/.match?(char)
-      return ('a'.ord + shift_factor - 1).chr if char == 'z'
-      return ('A'.ord + shift_factor - 1).chr if char == 'Z'
-      return ('0'.ord + shift_factor - 1).chr if char == '9'
-
-      (char.ord + shift_factor).chr
-    end
-
-    def unshift_char(char, unshift_factor)
-      return char if char == '_' || /\W/.match?(char)
-      return ('z'.ord - unshift_factor + 1).chr if char == 'a'
-      return ('Z'.ord - unshift_factor + 1).chr if char == 'A'
-      return ('9'.ord - unshift_factor + 1).chr if char == '0'
-
-      (char.ord - unshift_factor).chr
+    def is_integer?(char)
+      char.to_i.to_s == char
     end
   end
 end

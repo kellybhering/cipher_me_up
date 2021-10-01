@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
-class LettersAndNumbersShifter
-  class << self
+module LettersAndNumbersShifter
+  def self.extended(klass)
+    klass.extend(ClassMethods)
+  end
+
+  module ClassMethods
     def shift(letter: nil, number: nil, shift_factor: 1)
       return unless letter || number
       return if letter && number
@@ -27,12 +31,32 @@ class LettersAndNumbersShifter
     private
 
     def shift_letter(letter, shift_factor)
+      is_uppercase?(letter) ? shift_uppercase(letter, shift_factor) : shift_downcase(letter, shift_factor)
+    end
+
+    def shift_uppercase(letter, shift_factor)
+      qty_of_positions_from_a = letter.ord - 'A'.ord
+      qty_of_letters_to_shift = (shift_factor + qty_of_positions_from_a) % 26
+      ('A'.ord + qty_of_letters_to_shift).chr
+    end
+
+    def shift_downcase(letter, shift_factor)
       qty_of_positions_from_a = letter.ord - 'a'.ord
       qty_of_letters_to_shift = (shift_factor + qty_of_positions_from_a) % 26
       ('a'.ord + qty_of_letters_to_shift).chr
     end
 
     def unshift_letter(letter, shift_factor)
+      is_uppercase?(letter) ? unshift_uppercase(letter, shift_factor) : unshift_downcase(letter, shift_factor)
+    end
+
+    def unshift_uppercase(letter, shift_factor)
+      qty_of_positions_from_z = 'Z'.ord - letter.ord
+      qty_of_letters_to_unshift = (shift_factor + qty_of_positions_from_z) % 26
+      ('Z'.ord - qty_of_letters_to_unshift).chr
+    end
+
+    def unshift_downcase(letter, shift_factor)
       qty_of_positions_from_z = 'z'.ord - letter.ord
       qty_of_letters_to_unshift = (shift_factor + qty_of_positions_from_z) % 26
       ('z'.ord - qty_of_letters_to_unshift).chr
@@ -57,5 +81,11 @@ class LettersAndNumbersShifter
     def valid_number?(number)
       /\d/.match?(number.to_s)
     end
+
+    def is_uppercase?(letter)
+      /[A-Z]/.match?(letter)
+    end
   end
+
+  extend self
 end
