@@ -10,7 +10,7 @@ class FixedShiftCipher
 
       result = ''
       word.each_char do |char|
-        shifted_value = if is_integer?(char)
+        shifted_value = if StringHelper.is_integer?(char)
                           shift(number: char,
                                 shift_factor: shift_factor).to_s
                         else
@@ -29,7 +29,7 @@ class FixedShiftCipher
 
       result = ''
       word.each_char do |char|
-        unshifted_value = if is_integer?(char)
+        unshifted_value = if StringHelper.is_integer?(char)
                             unshift(number: char,
                                     shift_factor: unshift_factor).to_s
                           else
@@ -41,12 +41,6 @@ class FixedShiftCipher
       end
 
       result
-    end
-
-    private
-
-    def is_integer?(char)
-      char.to_i.to_s == char
     end
   end
 end

@@ -31,7 +31,7 @@ module LettersAndNumbersShifter
     private
 
     def shift_letter(letter, shift_factor)
-      is_uppercase?(letter) ? shift_uppercase(letter, shift_factor) : shift_downcase(letter, shift_factor)
+      StringHelper.is_uppercase?(letter) ? shift_uppercase(letter, shift_factor) : shift_downcase(letter, shift_factor)
     end
 
     def shift_uppercase(letter, shift_factor)
@@ -47,7 +47,12 @@ module LettersAndNumbersShifter
     end
 
     def unshift_letter(letter, shift_factor)
-      is_uppercase?(letter) ? unshift_uppercase(letter, shift_factor) : unshift_downcase(letter, shift_factor)
+      if StringHelper.is_uppercase?(letter)
+        unshift_uppercase(letter,
+                          shift_factor)
+      else
+        unshift_downcase(letter, shift_factor)
+      end
     end
 
     def unshift_uppercase(letter, shift_factor)
@@ -80,10 +85,6 @@ module LettersAndNumbersShifter
 
     def valid_number?(number)
       /\d/.match?(number.to_s)
-    end
-
-    def is_uppercase?(letter)
-      /[A-Z]/.match?(letter)
     end
   end
 

@@ -3,4 +3,5 @@
 require 'byebug'
 
 require 'letters_and_numbers_shifter'
-Dir[File.join('./strategies/*.rb')].each { |file| require file }
+require 'string_helper'
+Dir[File.join('./ciphers/*.rb')].each { |file| require file }
