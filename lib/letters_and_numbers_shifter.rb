@@ -9,8 +9,8 @@ module LettersAndNumbersShifter
     def shift(letter: nil, number: nil, shift_factor: 1)
       return unless letter || number
       return if letter && number
-      return letter if letter && !valid_letter?(letter)
-      return number if number && !valid_number?(number)
+      return letter if letter && !StringHelper.valid_letter?(letter)
+      return number if number && !StringHelper.valid_number?(number)
 
       return shift_letter(letter, shift_factor) if letter
 
@@ -20,8 +20,8 @@ module LettersAndNumbersShifter
     def unshift(letter: nil, number: nil, shift_factor: 1)
       return unless letter || number
       return if letter && number
-      return letter if letter && !valid_letter?(letter)
-      return number if number && !valid_number?(number)
+      return letter if letter && !StringHelper.valid_letter?(letter)
+      return number if number && !StringHelper.valid_number?(number)
 
       return unshift_letter(letter, shift_factor) if letter
 
@@ -77,14 +77,6 @@ module LettersAndNumbersShifter
       qty_of_positions_from_nine = '9'.ord - number.to_s.ord
       qty_of_numbers_to_unshift = (shift_factor + qty_of_positions_from_nine) % 10
       ('9'.ord - qty_of_numbers_to_unshift).chr.to_i
-    end
-
-    def valid_letter?(letter)
-      /[a-zA-Z]/.match?(letter)
-    end
-
-    def valid_number?(number)
-      /\d/.match?(number.to_s)
     end
   end
 
