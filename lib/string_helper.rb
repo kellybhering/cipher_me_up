@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# The purpose of this class is to be a centralized way to deal with string operations
 class StringHelper
   class << self
     def is_integer?(char)

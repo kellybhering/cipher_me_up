@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# This module allows shifting and unshifting letters and numbers, depending on a number called (un)shift factor.
+# Its purpose is to be used by itself or mixed in a class
 module LettersAndNumbersShifter
   def self.extended(klass)
     klass.extend(ClassMethods)

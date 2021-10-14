@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# This class is inspired by Vigenere Cipher, allowing ciphering a word with letters and numbers only.
 class ShiftByWordCipher
   extend LettersAndNumbersShifter
 

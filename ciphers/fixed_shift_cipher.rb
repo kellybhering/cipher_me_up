@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# This class is an adaptation to Caesar Cipher, allowing ciphering a word with letters and numbers only.
+# This class is an adaptation to Caesar Cipher, allowing ciphering a word with letters and numbers only, depending on a number to shift the characters.
 class FixedShiftCipher
   extend LettersAndNumbersShifter
 
