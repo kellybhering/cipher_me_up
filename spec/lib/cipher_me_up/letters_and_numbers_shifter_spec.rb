@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe LettersAndNumbersShifter do
+RSpec.describe LettersAndNumbersShifter do
   describe '.shift' do
     it 'should return nil when trying to shift letter and number together' do
       expect(LettersAndNumbersShifter.shift(letter: 'a', number: 9)).to be nil

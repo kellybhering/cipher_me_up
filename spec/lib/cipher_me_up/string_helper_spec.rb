@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe StringHelper do
+RSpec.describe StringHelper do
   describe '.is_integer?' do
     it 'should return true for an integer' do
       expect(StringHelper.is_integer?('1')).to be true

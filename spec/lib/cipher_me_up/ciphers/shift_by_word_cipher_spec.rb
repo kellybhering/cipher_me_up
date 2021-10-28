@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe ShiftByWordCipher do
+RSpec.describe ShiftByWordCipher do
   describe '.cipher' do
     subject { described_class.cipher(word, keyword: keyword) }
 

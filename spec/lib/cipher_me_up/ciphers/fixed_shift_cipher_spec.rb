@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe FixedShiftCipher do
+RSpec.describe FixedShiftCipher do
   describe '.cipher' do
     context 'with an informed shift factor' do
       subject { FixedShiftCipher.cipher(word, shift_factor: 2) }
