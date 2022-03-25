@@ -2,7 +2,7 @@
 
 module CipherMeUp
   class MainCommand < Thor
-    desc 'Ciphers WORD', "Ciphers a word with 'shift_factor' or 'keyword'"
+    desc 'word', "Cipher a word with 'shift_factor' or 'keyword'"
     method_option :with, type: :string, aliases: '-w', required: true,
                          desc: "Type of ciphering to be used. It should be 'shift_factor' or 'keyword'"
     method_option :value, type: :string, aliases: '-v', required: true,
