@@ -32,3 +32,5 @@ Or a fixed shift factor:
 ```
 bundle exec exe/cipher word CIPHER_ME_UP --with shift_factor --value 3
 ```
+
+
